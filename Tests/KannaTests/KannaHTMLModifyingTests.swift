@@ -24,7 +24,6 @@
  */
 import XCTest
 import Foundation
-import CoreFoundation
 @testable import Kanna
 
 class KannaHTMLModifyingTests: XCTestCase {

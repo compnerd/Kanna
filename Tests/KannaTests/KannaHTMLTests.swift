@@ -24,8 +24,7 @@ SOFTWARE.
 */
 import XCTest
 import Foundation
-import CoreFoundation
-#if os(Linux)
+#if !os(macOS)
 import FoundationNetworking
 #endif
 @testable import Kanna
