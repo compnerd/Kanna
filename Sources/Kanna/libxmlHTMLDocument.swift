@@ -27,7 +27,7 @@ import libxml2
 
 extension String.Encoding {
     var IANACharSetName: String? {
-        #if os(Linux) && swift(>=4)
+        #if (os(Linux) || os(Windows)) && swift(>=4)
         switch self {
         case .ascii:
             return "us-ascii"

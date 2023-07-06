@@ -1,15 +1,15 @@
-// swift-tools-version:5.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version:5.2
+
 import PackageDescription
 
 // Starting with Xcode 12, we don't need to depend on our own libxml2 target
-#if swift(>=5.3) && !os(Linux)
+#if swift(>=5.3) && os(macOS)
 let dependencies: [Target.Dependency] = []
 #else
 let dependencies: [Target.Dependency] = ["libxml2"]
 #endif
 
-#if swift(>=5.2) && !os(Linux)
+#if swift(>=5.2) && (os(macOS) || os(Windows))
 let pkgConfig: String? = nil
 #else
 let pkgConfig = "libxml-2.0"
@@ -46,6 +46,11 @@ let package = Package(
                 "Kanna/Info.plist",
                 "Kanna/Kanna.h",
                 "../Tests/KannaTests/Data"
+            ],
+            cSettings: [.define("LIBXML_STATIC", .when(platforms: [.windows]))],
+            linkerSettings: [
+                .linkedLibrary("xml2", .when(platforms: [.linux])),
+                .linkedLibrary("libxml2s", .when(platforms: [.windows])),
             ]
         ),
         .testTarget(
