@@ -49,6 +49,12 @@ let package = Package(
 )
 ```
 
+Windows requires passing additional flags when building due to nuget support being incomplete.
+
+```cmd
+> swift build -Xcc -IS:\Library\libxml2-2.9.12\usr\include -Xcc -IS:\Library\libxml2-2.9.12\usr\include\libxml2 -Xlinker -LS:\Library\libxml2-2.9.12\usr\lib\x64
+```
+
 ```bash
 $ swift build
 ```
